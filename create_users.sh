@@ -8,3 +8,17 @@ if [ "$EUID" -ne 0 ]; then
     echo "Fel: Detta script måste köras som root."
     exit 1
 fi
+
+# Kontrollera att minst ett användarnamn skickas in som argument.
+if [ "$#" -eq 0 ]; then
+    echo "Fel: Ange minst ett användarnamn."
+    exit 1
+fi
+
+# Loopa igenom alla användarnamn som skickas in till scriptet.
+for username in "$@"; do
+    echo "Skapar användare: $username"
+
+    # Skapa användaren med hemkatalog.
+    useradd -m "$username"
+done
