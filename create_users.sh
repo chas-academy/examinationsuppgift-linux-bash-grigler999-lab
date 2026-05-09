@@ -37,5 +37,14 @@ for username in "$@"; do
     chmod 700 "/home/$username/Downloads"
     chmod 700 "/home/$username/Work"
 
+    # Skapa en personlig välkomstfil i användarens hemkatalog.
+    {
+        echo "Välkommen $username"
+        cut -d: -f1 /etc/passwd | grep -v "^$username$"
+    } > "/home/$username/welcome.txt"
+
+    # Sätt rätt ägare och rättigheter på välkomstfilen.
+    chown "$username:$username" "/home/$username/welcome.txt"
+    chmod 600 "/home/$username/welcome.txt"
 
 done
