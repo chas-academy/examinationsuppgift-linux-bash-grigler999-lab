@@ -27,4 +27,15 @@ for username in "$@"; do
     mkdir -p "/home/$username/Downloads"
     mkdir -p "/home/$username/Work"
 
+    # Sätt rätt ägare på användarens mappar.
+    chown "$username:$username" "/home/$username/Documents"
+    chown "$username:$username" "/home/$username/Downloads"
+    chown "$username:$username" "/home/$username/Work"
+
+    # Sätt rättigheter så att endast ägaren kan läsa, skriva och öppna mapparna.
+    chmod 700 "/home/$username/Documents"
+    chmod 700 "/home/$username/Downloads"
+    chmod 700 "/home/$username/Work"
+
+
 done
