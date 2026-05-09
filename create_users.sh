@@ -36,8 +36,10 @@ for username in "$@"; do
     chmod 700 "/home/$username/Documents"
     chmod 700 "/home/$username/Downloads"
     chmod 700 "/home/$username/Work"
+done
 
-    # Skapa en personlig välkomstfil i användarens hemkatalog.
+# Skapa välkomstfil för varje användare efter att alla användare har skapats.
+for username in "$@"; do
     {
         echo "Välkommen $username"
         cut -d: -f1 /etc/passwd | grep -v "^$username$"
@@ -46,5 +48,4 @@ for username in "$@"; do
     # Sätt rätt ägare och rättigheter på välkomstfilen.
     chown "$username:$username" "/home/$username/welcome.txt"
     chmod 600 "/home/$username/welcome.txt"
-
 done
