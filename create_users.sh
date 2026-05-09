@@ -21,4 +21,10 @@ for username in "$@"; do
 
     # Skapa användaren med hemkatalog.
     useradd -m "$username"
+
+    # Skapa undermappar i användarens hemkatalog.
+    mkdir -p "/home/$username/Documents"
+    mkdir -p "/home/$username/Downloads"
+    mkdir -p "/home/$username/Work"
+
 done
